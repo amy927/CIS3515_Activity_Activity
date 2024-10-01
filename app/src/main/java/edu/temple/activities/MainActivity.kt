@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             layoutManager = LinearLayoutManager(this@MainActivity)
+
         }
 
 
@@ -36,12 +37,15 @@ class MainActivity : AppCompatActivity() {
 
 
 /* Convert to RecyclerView.Adapter */
-class TextSizeAdapter (private val textSizes: Array<Int>, callback: (Int)->Unit) : RecyclerView.Adapter<TextSizeAdapter.TextSizeViewHolder>() {
+class TextSizeAdapter (private val _textSizes: Array<Int>, _callback: (Int)->Unit) : RecyclerView.Adapter<TextSizeAdapter.TextSizeViewHolder>() {
 
-    // TODO Step 1: Complete onClickListener to return selected number
+    private val callback = _callback
+    private val textSizes = _textSizes
+
     inner class TextSizeViewHolder(val textView: TextView) : RecyclerView.ViewHolder (textView) {
+
         init {
-            textView.setOnClickListener {  }
+            textView.setOnClickListener { callback(textSizes[adapterPosition]) }
         }
     }
 
